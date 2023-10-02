@@ -1,0 +1,54 @@
+﻿using System;
+using System.IO;
+using System.Linq;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Insira o caminho completo do arquivo: ");
+        string caminhoArquivo = Console.ReadLine();
+
+        if (File.Exists(caminhoArquivo))
+        {
+            string[] linhas = File.ReadAllLines(caminhoArquivo);
+
+            string linhaComMaisVogais = "";
+            int maxVogais = 0;
+
+            string linhaComMaisConsoantes = "";
+            int maxConsoantes = 0;
+
+            foreach (string linha in linhas)
+            {
+                int vogaisNaLinha = ContarVogais(linha);
+                int consoantesNaLinha = linha.Count(char.IsLetter) - vogaisNaLinha;
+
+                if (vogaisNaLinha > maxVogais)
+                {
+                    maxVogais = vogaisNaLinha;
+                    linhaComMaisVogais = linha;
+                }
+
+                if (consoantesNaLinha > maxConsoantes)
+                {
+                    maxConsoantes = consoantesNaLinha;
+                    linhaComMaisConsoantes = linha;
+                }
+            }
+
+            Console.WriteLine($"Linha com mais vogais: {linhaComMaisVogais}");
+            Console.WriteLine($"Linha com mais consoantes: {linhaComMaisConsoantes}");
+        }
+        else
+        {
+            Console.WriteLine("O arquivo especificado não existe.");
+        }
+    }
+
+    static int ContarVogais(string texto)
+    {
+        string vogais = "AEIOUaeiou";
+        return texto.Count(c => vogais.Contains(c));
+    }
+}

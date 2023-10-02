@@ -1,0 +1,1 @@
+DELETE FROM clientes WHERE nome ILIKE '% santos';

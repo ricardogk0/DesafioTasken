@@ -1,0 +1,45 @@
+﻿using System.Text;
+
+class Program
+{
+    static void Main(String[] args)
+    {
+        string entrada = "jjjjooaoo";
+        string resultado = CompactarString(entrada);
+        Console.WriteLine(resultado);
+    }
+
+    static string CompactarString(string input)
+    {
+        StringBuilder resultado = new StringBuilder();
+        char cAtual = input[0];
+        int op = 1;
+
+        for (int i = 1; i < input.Length; i++)
+        {
+            if (input[i] == cAtual)
+            {
+                op++;
+            }
+            else
+            {
+                resultado.Append(cAtual);
+                if (op > 1)
+                {
+                    resultado.Append(op);
+                }
+
+                cAtual = input[i];
+                op = 1;
+            }
+        }
+
+        resultado.Append(cAtual);
+        if (op > 1)
+        {
+            resultado.Append(op);
+        }
+
+        return resultado.ToString();
+    }
+}

@@ -1,0 +1,30 @@
+﻿class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Informe um número:");
+        int n = int.Parse(Console.ReadLine());
+
+        if (n <= 0)
+        {
+            Console.WriteLine("Valor inválido. O número deve ser maior que zero.");
+        }
+        else
+        {
+            Calcular(n);
+        }
+    }
+
+    static void Calcular(int n)
+    {
+        for (int i = n; i >= 1; i--)
+        {
+            for (int j = i; j > 0; j--)
+            {
+                int valor = j * j;
+                Console.Write(valor + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}

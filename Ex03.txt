@@ -1,0 +1,62 @@
+﻿namespace Ex03
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> numeros = new List<int>();
+            int maiorNumero = int.MinValue;
+            int menorNumeroImpar = int.MaxValue;
+            int numero;
+            int totalNumeros = 0;
+            double soma = 0;
+            Dictionary<int, int> contadorNumeros = new Dictionary<int, int>();
+
+            Console.WriteLine("Digite números positivos (0 para encerrar):");
+
+            do
+            {
+                if (int.TryParse(Console.ReadLine(), out numero))
+                {
+                    if (numero != 0)
+                    {
+                        numeros.Add(numero);
+                        soma += numero;
+                        totalNumeros++;
+
+                        // Verifica se é o maior número lido
+                        if (numero > maiorNumero)
+                            maiorNumero = numero;
+
+                        // Verifica se é o menor número ímpar lido
+                        if (numero % 2 != 0 && numero < menorNumeroImpar)
+                            menorNumeroImpar = numero;
+
+                        // Atualiza o contador de números
+                        if (contadorNumeros.ContainsKey(numero))
+                            contadorNumeros[numero]++;
+                        else
+                            contadorNumeros[numero] = 1;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Entrada inválida. Tente novamente.");
+                }
+            } while (numero != 0);
+
+            Console.WriteLine("a) Quantos Números foram lidos: " + totalNumeros);
+            Console.WriteLine("b) Maior Número: " + maiorNumero);
+            Console.WriteLine("c) Média: " + (soma / totalNumeros));
+            Console.WriteLine($"d) Menor número ímpar lido: {(menorNumeroImpar != int.MaxValue ? menorNumeroImpar.ToString() : "Nenhum número ímpar foi digitado.")}");
+
+
+            Console.Write("e) Quantidade que cada número ocorreu: ");
+            foreach (var par in contadorNumeros)
+            {
+                Console.WriteLine("O número " + par.Key + " ocorreu " + par.Value + " vez(es)");
+            }
+
+        }
+    }
+}
